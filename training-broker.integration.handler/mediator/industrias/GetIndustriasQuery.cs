@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace training_broker.integration.handler.mediator.empresas
+namespace training_broker.integration.handler.mediator.industrias
 {
-    public class GetEmpresasQuery : IRequest<GetEmpresasOut>
+    public class GetIndustriasQuery : IRequest<GetIndustriasOut>
     {
     }
 }

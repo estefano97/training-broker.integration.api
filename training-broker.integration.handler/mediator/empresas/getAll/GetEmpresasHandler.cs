@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using training_broker.integration.infrastructure.Database;
 
-namespace training_broker.integration.handler.mediator.empresas
+namespace training_broker.integration.handler.mediator.empresas.getAll
 {
     internal class GetEmpresasHandler : IRequestHandler<GetEmpresasQuery, GetEmpresasOut>
     {
@@ -31,7 +31,7 @@ namespace training_broker.integration.handler.mediator.empresas
 
                 return new GetEmpresasOut { empresas = parsed };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }

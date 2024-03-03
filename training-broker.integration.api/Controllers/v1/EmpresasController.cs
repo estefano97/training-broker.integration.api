@@ -1,11 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using training_broker.integration.api.Controllers.v1._base;
-using training_broker.integration.handler.mediator.empresas;
+using training_broker.integration.handler.mediator.empresas.getAll;
 
 namespace training_broker.integration.api.Controllers.v1
 {
-
     public class EmpresasController : V1BaseController
     {
         public EmpresasController(IMediator mediator) : base(mediator)
@@ -18,7 +17,7 @@ namespace training_broker.integration.api.Controllers.v1
             return Ok("Funcionando!");
         }
 
-        [HttpGet("empresas")]
+        [HttpGet("all")]
         public async Task<IActionResult> GetAllEmpresas()
         {
             try
