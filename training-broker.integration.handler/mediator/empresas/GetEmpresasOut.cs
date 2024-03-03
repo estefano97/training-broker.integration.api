@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace training_broker.integration.handler.mediator.empresas
 {
-    internal class GetEmpresasOut
+    public class GetEmpresasOut
     {
-        internal class Empresa
+        public class Empresa
         {
             public Guid Id { get; set; }
 
