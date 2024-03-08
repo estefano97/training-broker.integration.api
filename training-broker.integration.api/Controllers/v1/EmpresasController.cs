@@ -16,6 +16,7 @@ namespace training_broker.integration.api.Controllers.v1
         {
             return Ok("Funcionando!");
         }
+        
 
         [HttpGet("all")]
         public async Task<IActionResult> GetAllEmpresas()
