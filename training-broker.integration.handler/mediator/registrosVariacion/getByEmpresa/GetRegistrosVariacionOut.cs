@@ -1,12 +1,9 @@
+namespace training_broker.integration.handler.mediator.registrosVariacion.getByEmpresa;
 
-namespace training_broker.integration.handler.mediator.registros;
-
-public class GetRegistrosOut
+public class GetRegistrosVariacionOut
 {
     public class RegistrosVariacion
     {
-        public string Emisor { get; set; } = null!;
-
         public decimal ValorNominalUnitario { get; set; }
 
         public decimal? PrecioUltimasSemanasAlto { get; set; }
@@ -28,7 +25,15 @@ public class GetRegistrosOut
         public decimal IndiceRotacion { get; set; }
 
         public string ActualizacionDeInfoFinanciera { get; set; } = null!;
+
+        public DateTime Fecha { get; set; }
+
     }
-    
+
     public List<RegistrosVariacion> registros { get; set; }
+
+    public Guid IdIndustria { get; set; }
+
+    public string Emisor { get; set; } = null!;
+
 }

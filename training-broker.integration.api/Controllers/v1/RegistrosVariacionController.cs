@@ -2,14 +2,14 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using training_broker.integration.api.Controllers.v1._base;
-using training_broker.integration.handler.mediator.registros;
+using training_broker.integration.handler.mediator.registrosVariacion.getByEmpresa;
 
 namespace training_broker.integration.api.Controllers.v1
 {
     
-    public class RegistrosController : V1BaseController
+    public class RegistrosVariacionController : V1BaseController
     {
-        public RegistrosController(IMediator mediator) : base(mediator)
+        public RegistrosVariacionController(IMediator mediator) : base(mediator)
         {
         }
         
@@ -19,7 +19,7 @@ namespace training_broker.integration.api.Controllers.v1
         {
             try
             {
-                var response = await _mediator.Send(new GetRegistrosQuery() { IdEmpresa = idEmpresa});
+                var response = await _mediator.Send(new GetRegistrosVariacionQuery() { IdEmpresa = idEmpresa});
                 return Ok(response);
             }
             catch (Exception ex)

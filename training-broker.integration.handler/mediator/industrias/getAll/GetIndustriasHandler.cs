@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using training_broker.integration.infrastructure.Database;
 
-namespace training_broker.integration.handler.mediator.industrias
+namespace training_broker.integration.handler.mediator.industrias.getAll
 {
     internal class GetIndustriasHandler : IRequestHandler<GetIndustriasQuery, GetIndustriasOut>
     {
@@ -23,8 +23,8 @@ namespace training_broker.integration.handler.mediator.industrias
             {
                 var allIndustrias = await _context.Industrias.ToListAsync();
                 var parsed = _mapper.Map<List<GetIndustriasOut.Industria>>(allIndustrias);
-                
-                return new GetIndustriasOut { industrias = parsed};
+
+                return new GetIndustriasOut { industrias = parsed };
             }
             catch (Exception ex)
             {

@@ -1,5 +1,4 @@
-﻿
-namespace training_broker.integration.handler.mediator.industrias
+﻿namespace training_broker.integration.handler.mediator.industrias.getAll
 {
     public class GetIndustriasOut
     {

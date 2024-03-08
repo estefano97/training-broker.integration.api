@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using training_broker.integration.api.Controllers.v1._base;
-using training_broker.integration.handler.mediator.industrias;
+using training_broker.integration.handler.mediator.industrias.getAll;
 
 namespace training_broker.integration.api.Controllers.v1
 {

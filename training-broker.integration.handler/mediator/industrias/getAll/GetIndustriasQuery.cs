@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace training_broker.integration.handler.mediator.industrias
+namespace training_broker.integration.handler.mediator.industrias.getAll
 {
     public class GetIndustriasQuery : IRequest<GetIndustriasOut>
     {
