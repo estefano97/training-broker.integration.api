@@ -22,7 +22,7 @@ internal class GetRegistrosVariacionHandler : IRequestHandler<GetRegistrosVariac
         try
         {
             var enterpriseInfo = await _context.Empresas.Where(data => data.Id == request.IdEmpresa).FirstOrDefaultAsync() ?? throw new ArgumentNullException("IdEmpresa doesnt exists");
-            var data = await _context.RegistroVariacionStockEmpresas.Include(d => d.IdFechaNavigation).Where(el => el.IdEmpresa == request.IdEmpresa).ToListAsync();
+            var data = await _context.RegistroVariacionStockEmpresas.Include(d => d.IdFechaNavigation).Where(el => el.IdEmpresa == request.IdEmpresa).OrderBy(d => d.IdFechaNavigation.Fecha1).ToListAsync();
             var parsed = _mapper.Map<List<GetRegistrosVariacionOut.RegistrosVariacion>>(data);
 
             return new GetRegistrosVariacionOut { registros = parsed, Emisor = enterpriseInfo.Name, IdIndustria = enterpriseInfo.IdIndustria };
