@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 namespace training_broker.integration.infrastructure.Database;
 
 public partial class TrainingBrokerContext : DbContext
 {
-    private readonly IConfiguration _configuration;
-    public TrainingBrokerContext(IConfiguration config)
+    public TrainingBrokerContext()
     {
-        _configuration = config;
     }
 
-    public TrainingBrokerContext(DbContextOptions<TrainingBrokerContext> options, IConfiguration config)
+    public TrainingBrokerContext(DbContextOptions<TrainingBrokerContext> options)
         : base(options)
     {
-        _configuration = config;
     }
 
     public virtual DbSet<Empresa> Empresas { get; set; }
@@ -28,9 +23,11 @@ public partial class TrainingBrokerContext : DbContext
 
     public virtual DbSet<RegistroVariacionStockEmpresa> RegistroVariacionStockEmpresas { get; set; }
 
+    public virtual DbSet<Usuario> Usuarios { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer(_configuration.GetConnectionString("TrainingBrokerDatabase"));
+        => optionsBuilder.UseSqlServer("Server=sql.bsite.net\\MSSQL2016;Database=kali123_; Trusted_Connection=False; TrustServerCertificate=True; User=kali123_; Password=Kali123!");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -44,10 +41,12 @@ public partial class TrainingBrokerContext : DbContext
             entity.Property(e => e.Image)
                 .HasMaxLength(300)
                 .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS")
                 .HasColumnName("image");
             entity.Property(e => e.Name)
                 .HasMaxLength(300)
                 .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS")
                 .HasColumnName("name");
         });
 
@@ -64,6 +63,7 @@ public partial class TrainingBrokerContext : DbContext
             entity.Property(e => e.Valor)
                 .HasMaxLength(50)
                 .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS")
                 .HasColumnName("valor");
         });
 
@@ -77,6 +77,7 @@ public partial class TrainingBrokerContext : DbContext
             entity.Property(e => e.Nombre)
                 .HasMaxLength(300)
                 .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS")
                 .HasColumnName("nombre");
         });
 
@@ -91,30 +92,36 @@ public partial class TrainingBrokerContext : DbContext
                 .HasColumnName("id");
             entity.Property(e => e.ActualizacionDeInfoFinanciera)
                 .HasMaxLength(50)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS");
             entity.Property(e => e.Dpyield)
                 .HasMaxLength(100)
                 .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS")
                 .HasColumnName("DPYield");
             entity.Property(e => e.Emisor)
                 .HasMaxLength(300)
                 .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS")
                 .HasColumnName("emisor");
             entity.Property(e => e.Fecha)
                 .HasMaxLength(50)
                 .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS")
                 .HasColumnName("fecha");
             entity.Property(e => e.IndiceRotacion).HasColumnType("decimal(38, 4)");
             entity.Property(e => e.Industria)
                 .HasMaxLength(300)
                 .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS")
                 .HasColumnName("industria");
             entity.Property(e => e.PrecioUltimasSemanasAlto).HasColumnType("decimal(38, 4)");
             entity.Property(e => e.PrecioUltimasSemanasBajo).HasColumnType("decimal(38, 4)");
             entity.Property(e => e.PrecioUnitarioVeces).HasColumnType("decimal(38, 4)");
             entity.Property(e => e.PresenciaBursatil)
                 .HasMaxLength(100)
-                .IsUnicode(false);
+                .IsUnicode(false)
+                .UseCollation("Modern_Spanish_CI_AS");
             entity.Property(e => e.Pvl)
                 .HasColumnType("decimal(38, 4)")
                 .HasColumnName("PVL");
@@ -138,6 +145,31 @@ public partial class TrainingBrokerContext : DbContext
                 .HasForeignKey(d => d.IdIndustria)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("RegistroVariacionStockEmpresa_FK_2");
+        });
+
+        modelBuilder.Entity<Usuario>(entity =>
+        {
+            entity.HasKey(e => e.Id).HasName("NewTable_PK");
+
+            entity.Property(e => e.Id)
+                .HasDefaultValueSql("(newid())")
+                .HasColumnName("id");
+            entity.Property(e => e.Celular)
+                .HasMaxLength(10)
+                .IsUnicode(false)
+                .HasColumnName("celular");
+            entity.Property(e => e.Email)
+                .HasMaxLength(128)
+                .IsUnicode(false)
+                .HasColumnName("email");
+            entity.Property(e => e.Nombres)
+                .HasMaxLength(300)
+                .IsUnicode(false)
+                .HasColumnName("nombres");
+            entity.Property(e => e.Password)
+                .HasMaxLength(256)
+                .IsUnicode(false)
+                .HasColumnName("password");
         });
 
         OnModelCreatingPartial(modelBuilder);
