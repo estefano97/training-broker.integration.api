@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace training_broker.integration.infrastructure.Database;
 
-public partial class Usuario
+public  class Usuario
 {
     public Guid Id { get; set; }
 
